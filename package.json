@@ -1,6 +1,6 @@
 {
   "name": "react-props-context",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "A library for accessing props using context",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
