@@ -1,0 +1,47 @@
+{
+  "name": "react-props-context",
+  "version": "0.0.1",
+  "description": "A library for accessing props using context",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "homepage": "https://github.com/humflelump/react-props-context.git",
+  "scripts": {
+    "start": "tsc --watch",
+    "build": "tsc",
+    "test": "yarn build && jest",
+    "prepublish": "npm run build && npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/humflelump/react-props-context.git"
+  },
+  "keywords": [
+    "react",
+    "props",
+    "context"
+  ],
+  "author": "Mark Metzger markmetzger@utexas.edu",
+  "license": "MIT",
+  "babel": {
+    "presets": [
+      "es2015",
+      "react"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-jest": "^20.0.3",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "coveralls": "^2.13.1",
+    "jest": "^20.0.4",
+    "jest-cli": "^20.0.4",
+    "react": "18.2.0",
+    "typescript": "^3.6.3",
+    "underscore": "^1.9.0"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "16 - 19"
+  }
+}
