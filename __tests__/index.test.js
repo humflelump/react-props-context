@@ -3,5 +3,5 @@ import {
 } from "../dist/index";
 
 test("createPropsSelector exists", () => {
-  expect(typeof useCallbackRef).toBe('function');
+  expect(typeof createPropsSelector).toBe('function');
 });

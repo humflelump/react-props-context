@@ -1,56 +1,70 @@
-import React, { createContext, createRef, FC, useContext } from "react";
+import React from "react";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { createPropsSelector } from "react-props-context";
+import { Provider } from "react-redux";
 
-type createPropsSelectorInfo = {};
-
-export function createPropsSelector<Props>(info?: createPropsSelectorInfo) {
-  const PropsContext = createContext({ props: null as any as Props });
-
-  const HOC: FC<{ props: Props }> = (props) => {
-    const [ref] = React.useState<{ props: Props }>({ props: null } as any);
-    ref.props = props.props;
-    return (
-      <PropsContext.Provider value={ref}>
-        {props.children}
-      </PropsContext.Provider>
-    );
-  };
-
-  type Selector<R> = (props: Props) => R;
-
-  function usePropsSelector<R>(selector: Selector<R>) {
-    const props = useContext(PropsContext);
-    return selector(props.props);
-  }
-
-  return {
-    usePropsSelector,
-    PropsInjector: HOC,
-  };
-}
-
-type Props = {
-  count: number;
-  onCountChange: (newCount: number) => void;
+const initialState = {
+  value: 0,
 };
 
-const { PropsInjector, usePropsSelector } = createPropsSelector<Props>();
+type State = typeof initialState;
 
-function MyComponent() {
-  const count = usePropsSelector((props) => props.count);
-  const onCountChange = usePropsSelector((props) => props.onCountChange);
-  return <button onClick={() => onCountChange(count + 1)}>{count}</button>;
+type Props = {
+  state: State;
+  onUpdate: (state: State) => void;
+};
+
+export const counterSlice = createSlice({
+  name: "counter",
+  initialState,
+  reducers: {
+    increment: (state) => {
+      state.value += 1;
+    },
+  },
+});
+
+export const store = configureStore({
+  reducer: {
+    counter: counterSlice.reducer,
+  },
+});
+
+const { PropsInjector, usePropsSelector, useUpdater } =
+  createPropsSelector<Props>()({
+    reducerInfo: {
+      reducer: counterSlice.reducer,
+      getState: (props) => props.state,
+      getUpdater: (props) => (state, action) => {
+        props.onUpdate(state);
+      },
+    },
+  });
+
+function MyButton() {
+  const dispatch = useUpdater();
+  const count = usePropsSelector((props) => props.state.value);
+  return (
+    <button onClick={() => dispatch(counterSlice.actions.increment)}>
+      Count: {count}
+    </button>
+  );
 }
 
-const Wow = (props: Props) => {
+export const Component = (props: Props) => {
   return (
     <PropsInjector props={props}>
-      <MyComponent />
+      <MyButton />
     </PropsInjector>
   );
 };
 
 export const Test = () => {
-  const [count, setCount] = React.useState(0);
+  const [state, setState] = React.useState(initialState);
 
-  return <Wow count={count} onCountChange={setCount} />;
+  return (
+    <Provider store={store}>
+      <Component state={state} onUpdate={setState} />
+    </Provider>
+  );
 };
