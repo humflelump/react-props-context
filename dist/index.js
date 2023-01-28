@@ -36,6 +36,10 @@ function createPropsSelector() {
         var PropsContext = react_1.default.createContext({ props: null });
         var InitialStateContext = react_1.default.createContext(null);
         var SubscriptionContext = react_1.default.createContext(EMPTY_SET);
+        function usePropsRef() {
+            var result = react_1.default.useContext(PropsContext);
+            return result;
+        }
         var HOC = function (props) {
             var propsRef = react_1.default.useState({
                 props: null,
@@ -94,6 +98,7 @@ function createPropsSelector() {
         }
         return {
             usePropsSelector: usePropsSelector,
+            usePropsRef: usePropsRef,
             useInitialState: useInitialState,
             useUpdater: useUpdater,
             PropsInjector: HOC,

@@ -11,6 +11,9 @@ export declare function createPropsSelector<Props>(): <State, InitialState = nul
     } | undefined;
 } | undefined) => {
     usePropsSelector: <R>(selector: Selector<R, Props>) => R;
+    usePropsRef: () => {
+        props: Props;
+    };
     useInitialState: () => InitialState;
     useUpdater: () => (action: any) => void;
     PropsInjector: any;

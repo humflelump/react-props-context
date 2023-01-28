@@ -7828,10 +7828,10 @@ react-is@^17.0.1:
   version "17.0.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
 
-react-props-context@^0.0.15:
-  version "0.0.15"
-  resolved "https://registry.yarnpkg.com/react-props-context/-/react-props-context-0.0.15.tgz#27d8977f538f60263578473b72515e4123b47b11"
-  integrity sha512-LjhGusEHctp5+Zyc7TDVxT5gMB0djq65tvXSusIGqPyOXQrzKx4v/SAKVGuqA+fv6wOPUdMkxKLUYLUzZBCczQ==
+react-props-context@^0.0.16:
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/react-props-context/-/react-props-context-0.0.16.tgz#90efbabdeaea180f37ac67645ded4a7b89d1820c"
+  integrity sha512-IXJdK1tM47QbsRZrQqWPnc313KUhNlXXv4mvhCCixzTemKB14OYdeU3pTHUpqJlqJqV+F/01MC70p3O4VuAweg==
 
 react-redux@^7.1.1:
   version "7.2.2"

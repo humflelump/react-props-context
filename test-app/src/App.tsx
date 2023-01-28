@@ -30,7 +30,7 @@ export const store = configureStore({
   },
 });
 
-const { PropsInjector, usePropsSelector, useUpdater } =
+const { PropsInjector, usePropsSelector, useUpdater, usePropsRef } =
   createPropsSelector<Props>()({
     reducerInfo: {
       reducer: counterSlice.reducer,
@@ -43,6 +43,7 @@ const { PropsInjector, usePropsSelector, useUpdater } =
 
 function MyButton() {
   const dispatch = useUpdater();
+  console.log(usePropsRef());
   const count = usePropsSelector((props) => props.state.value);
   return (
     <button onClick={() => dispatch(counterSlice.actions.increment)}>

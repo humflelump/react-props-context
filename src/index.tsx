@@ -41,6 +41,11 @@ export function createPropsSelector<Props>() {
     const InitialStateContext = React.createContext<InitialState>(null);
     const SubscriptionContext = React.createContext(EMPTY_SET);
 
+    function usePropsRef() {
+      const result: { props: Props } = React.useContext(PropsContext);
+      return result;
+    }
+
     const HOC: React.FC<{ props: Props }> = (props) => {
       const [propsRef] = React.useState<{ props: Props }>({
         props: null,
@@ -116,6 +121,7 @@ export function createPropsSelector<Props>() {
 
     return {
       usePropsSelector,
+      usePropsRef,
       useInitialState,
       useUpdater,
       PropsInjector: HOC,
